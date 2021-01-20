@@ -5,10 +5,10 @@ import { BrowserRouter, Route }  from 'react-router-dom';
 import store from './store.js';
 
 import Navbar from './components/Navbar/Navbar';
-import Planets from './components/Planets/Planets';
+import PlanetsTable from './components/PlanetsTable/PlanetsTable';
 import PlanetInfo from './components/PlanetInfo/PlanetInfo';
-import PlanetFilmsGrid from './components/PlanetFilmsGrid/PlanetFilmsGrid';
-import PlanetResidentsGrid from './components/PlanetResidentsGrid/PlanetResidentsGrid';
+import PlanetFilmsTable from './components/PlanetFilmsTable/PlanetFilmsTable';
+import PlanetResidentsTable from './components/PlanetResidentsTable/PlanetResidentsTable';
 
 function App() {
   return (
@@ -16,10 +16,10 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <br />
-        <Route path='/' exact component={Planets} />
+        <Route path='/' exact component={PlanetsTable} />
         <Route path='/planet/:id' component={PlanetInfo} />
-        <Route path='/film/:id' component={PlanetFilmsGrid} />
-        <Route path='/resident/:id' component={PlanetResidentsGrid} />
+        <Route path='/film/:id' component={PlanetFilmsTable} />
+        <Route path='/resident/:id' component={PlanetResidentsTable} />
       </BrowserRouter>
     </Provider>
 

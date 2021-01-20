@@ -1,1 +1,4 @@
-export const TYPE = 'TYPE';
+export const GET_ALL_PLANETS = 'GET_ALL_PLANETS';
+export const GET_PLANET_INFO = 'GET_PLANET_INFO';
+export const GET_PLANET_FILMS = 'GET_PLANET_FILMS';
+export const GET_PLANET_RESIDENTS ='GET_PLANET_RESIDENTS';

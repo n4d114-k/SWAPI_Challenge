@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 
-import gridReducer from './gridReducer';
+import allPlanetsReducer from './allPlanetsReducer';
+import planetResidentReducer from './planetResidentReducer';
 
 
 export default combineReducers({
-  gridState: gridReducer
+  allPlanetsState: allPlanetsReducer,
+  PlanetResident: planetResidentReducer
 });

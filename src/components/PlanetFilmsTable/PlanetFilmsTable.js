@@ -1,9 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import './PlanetFilmsGrid.css';
+import './PlanetFilmsTable.css';
 
-function PlanetFilmsGrid() {
+function PlanetFilmsTable() {
   return (
     <React.Fragment>
 
@@ -11,9 +11,9 @@ function PlanetFilmsGrid() {
   );
 }
 
-PlanetFilmsGrid.propTypes = {
+PlanetFilmsTable.propTypes = {
 
 }
 
 
-export default PlanetFilmsGrid;
+export default PlanetFilmsTable;
