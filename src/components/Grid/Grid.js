@@ -1,3 +1,6 @@
+import React from 'react';
+import propTypes from 'prop-types';
+
 import './Grid.css';
 
 function Grid({data: {header = [], values = [], actions = []}}) {
@@ -13,7 +16,7 @@ function Grid({data: {header = [], values = [], actions = []}}) {
         {values.map((row, index) => (
           <tr key={index}>
             {header.map((colName) => <td key={colName}>{row[colName]}</td>)}
-            {!!actions.length && 
+            {!!actions.length &&
               <td className='gridActions'>
                 {actions.map(({label, action}) => <button onClick={() => action(row)}>{label}</button>)}
               </td>
@@ -23,6 +26,10 @@ function Grid({data: {header = [], values = [], actions = []}}) {
       </tbody>
     </table>
   );
+}
+
+Grid.propTypes = {
+
 }
 
 export default Grid;

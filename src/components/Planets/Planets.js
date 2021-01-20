@@ -1,6 +1,8 @@
+import React from 'react';
+
 import './Planets.css';
 
-import Grid from '../Grid';
+import Grid from '../Grid/Grid';
 
 function Planets() {
 
@@ -216,9 +218,7 @@ function Planets() {
   }
 
   return (
-    <div className='App'>
-      <Grid data={data} />
-    </div>
+    <Grid data={data} />
   );
 }
 
