@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import queryString from 'query-string';
-import axios from 'axios'
 import { connect } from 'react-redux';
 
 import './PlanetsTable.css';
@@ -14,10 +12,6 @@ function Planets({ allPlanetsProps, getAllPlanets}) {
 
   useEffect(() => {
     getAllPlanets();
-    axios.get('https://swapi.dev/api/planets').then(data => {
-      const planets = data.data.results;
-      setAllPlanets([...planets]);
-    });
   }, []);
 
   return (
@@ -30,7 +24,7 @@ function Planets({ allPlanetsProps, getAllPlanets}) {
         </tr>
       </thead>
       <tbody>
-        {allPlanets.map((row, index) => (
+        {allPlanetsProps.values ? allPlanetsProps.values.map((row, index) => (
           <tr key={index} id={row.name}>
             {allPlanetsProps.header.map((colName) => <td key={colName}><Link to={`/planet/:${index+1}`}>{row[colName]}</Link></td>)}
               <td>
@@ -40,7 +34,7 @@ function Planets({ allPlanetsProps, getAllPlanets}) {
                 { row.films.length > 0 ? <Link className='btn' to={`/planet/:${index+1}/films`} >{row.films.length}</Link>: ''}
               </td>
           </tr>
-        ))}
+        )) : <tr><td>Loading</td></tr> }
       </tbody>
     </table>
 

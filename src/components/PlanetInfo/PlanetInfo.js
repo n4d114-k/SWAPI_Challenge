@@ -1,36 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
+import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
 import './PlanetInfo.css';
 
-function PlanetInfo({ location }) {
+import getPlanetInfo from '../../actions/getPlanetInfo';
+
+function PlanetInfo({ location, allPlanetsProps, getPlanetInfo}) {
 
   const id = location.pathname.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g);
 
-  const [planet, setPlanet] = useState([]);
-
   useEffect(() => {
-    axios.get(`https://swapi.dev/api/planets/${id}`).then(data => {
-      const planet = data.data;
-      setPlanet(planet);
-    });
+    getPlanetInfo(id[0]);
   }, []);
 
   return (
     <div>
-      <div><b>Name:</b> {planet.name}</div>
-      <div><b>Rotation Period:</b> {planet.rotation_period}</div>
-      <div><b>Orbital Period:</b> {planet.orbital_period}</div>
-      <div><b>DiameterL:</b>{planet.diameter}</div>
-      <div><b>Climate:</b> {planet.climate}</div>
-      <div><b>Gravity:</b> {planet.gravity}</div>
-      <div><b>Terrain:</b> {planet.terrain}</div>
-      <div><b>Surface Water:</b> {planet.surface_water}</div>
-      <div><b>Population:</b> {planet.population}</div>
-      <div><Link to={`/planet/:${id}/films`} >Films</Link></div>
-      <div><Link to={`/planet/:${id}/residents`} >Residents</Link></div>
+      {allPlanetsProps.selectedPlanet ?
+        <React.Fragment>
+        <div><b>Name:</b> {allPlanetsProps.selectedPlanet.name}</div>
+        <div><b>Rotation Period:</b> {allPlanetsProps.selectedPlanet.rotation_period}</div>
+        <div><b>Orbital Period:</b> {allPlanetsProps.selectedPlanet.orbital_period}</div>
+        <div><b>DiameterL:</b>{allPlanetsProps.selectedPlanet.diameter}</div>
+        <div><b>Climate:</b> {allPlanetsProps.selectedPlanet.climate}</div>
+        <div><b>Gravity:</b> {allPlanetsProps.selectedPlanet.gravity}</div>
+        <div><b>Terrain:</b> {allPlanetsProps.selectedPlanet.terrain}</div>
+        <div><b>Surface Water:</b> {allPlanetsProps.selectedPlanet.surface_water}</div>
+        <div><b>Population:</b> {allPlanetsProps.selectedPlanet.population}</div>
+        <div><Link to={`/planet/:${id}/films`} >Films</Link></div>
+        <div><Link to={`/planet/:${id}/residents`} >Residents</Link></div>
+        </React.Fragment>
+        : <p>Loading</p>}
     </div>
   );
 }
@@ -39,5 +40,8 @@ PlanetInfo.propTypes = {
 
 }
 
+const mapStateToProps = state => ({
+  allPlanetsProps: state.allPlanetsState
+});
 
-export default PlanetInfo;
+export default connect(mapStateToProps, { getPlanetInfo })(PlanetInfo);

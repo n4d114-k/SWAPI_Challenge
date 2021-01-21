@@ -1,40 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import propTypes from 'prop-types';
 
 import './PlanetFilmsTable.css';
 
-function PlanetFilmsTable({ location }) {
+import getPlanetFilms from '../../actions/getPlanetFilms';
+
+function PlanetFilmsTable({ location, allPlanetsProps, getPlanetFilms}) {
 
   const id = location.pathname.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g);
 
-  const [planetName, setPlanetName] = useState([]);
-  const [planetFilmsLinks, setPlanetFilmsLinks] = useState([]);
-  const [planetFilms, setPlanetFilms] = useState([]);
-
-  const films = [];
-
   useEffect(() => {
-    axios.get(`https://swapi.dev/api/planets/${id}`).then(data => {
-      const name = data.data.name;
-      const filmsLinks = data.data.films;
-      setPlanetFilmsLinks(filmsLinks);
-      setPlanetName(name);
-    })
-    .then(planetFilmsLinks.map((link, index) => {
-      axios.get(link).then(filmData => {
-        films.push(filmData.data.title);
-        setPlanetFilms(films);
-      });
-    }));
+    getPlanetFilms(id[0]);
   }, []);
 
   return (
     <div>
-      <h3>{planetName} Films:</h3>
-      {planetFilmsLinks.map((film, index) => (
-        <p key={index}>{film}</p>
-      ))}
+      {allPlanetsProps.planetFilms ?
+        <React.Fragment>
+        <h3>{allPlanetsProps.planetFilms[0]} Films:</h3>
+        {allPlanetsProps.planetFilms[1].map((film, index) => (
+          <p key={index}>{film}</p>
+        ))}
+      </React.Fragment>
+      : <p>Loading</p>}
     </div>
   );
 }
@@ -43,4 +33,8 @@ PlanetFilmsTable.propTypes = {
 
 }
 
-export default PlanetFilmsTable;
+const mapStateToProps = state => ({
+  allPlanetsProps: state.allPlanetsState
+});
+
+export default connect(mapStateToProps, { getPlanetFilms })(PlanetFilmsTable);

@@ -20,7 +20,23 @@ function gridReducer(state = initialState, action) {
     case actionTypes.GET_ALL_PLANETS:
       return {
         ...state,
+        values: action.payload
       };
+    case actionTypes.GET_PLANET_INFO:
+      return {
+        ...state,
+        selectedPlanet: action.payload
+      }
+      case actionTypes.GET_PLANET_RESIDENTS:
+        return {
+          ...state,
+          planetResidents: action.payload
+        }
+        case actionTypes.GET_PLANET_FILMS:
+          return {
+            ...state,
+            planetFilms: action.payload
+          }
     default:
       return state;
   }

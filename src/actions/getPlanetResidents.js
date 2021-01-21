@@ -1,10 +1,19 @@
 import * as actionTypes from './types';
+import axios from 'axios';
 
-const getPlanetResidents = (planet) => {
+const getPlanetResidents = (planetId) => {
   return(dispatch) => {
     console.log('Getting Planet Residents');
-    dispatch({
+
+    axios.get(`https://swapi.dev/api/planets/${planetId}`).then(data => {
+      const name = data.data.name;
+      const residents = data.data.residents;
+      dispatch(addToPlanetresidents(name, residents));
+    });
+
+    const addToPlanetresidents = (name, data) => ({
       type: actionTypes.GET_PLANET_RESIDENTS,
+      payload: [name, data]
     });
   }
 }

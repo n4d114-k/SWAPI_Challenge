@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'
+import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
 import getPlanetResidents from '../../actions/getPlanetResidents';
 
 import './PlanetResidentstable.css';
 
-function PlanetResidentsTable({ location }) {
+function PlanetResidentsTable({ location, allPlanetsProps, getPlanetResidents}) {
 
   const id = location.pathname.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g);
 
-  const [planetResidents, setPlanetResidents] = useState([]);
-  const [planetName, setPlanetName] = useState([]);
-
   useEffect(() => {
-    axios.get(`https://swapi.dev/api/planets/${id}`).then(data => {
-      const name = data.data.name;
-      const residents = data.data.residents;
-      setPlanetResidents(residents);
-      setPlanetName(name);
-    });
+    getPlanetResidents(id[0]);
   }, []);
 
   return (
     <div>
-      <h3>{planetName} Residents:</h3>
-      {planetResidents.map((resident, index) => (
-        <p key={index}>{resident}</p>
-      ))}
+      {allPlanetsProps.planetResidents ?
+      <React.Fragment>
+        <h3>{allPlanetsProps.planetResidents[0]}</h3>
+        {allPlanetsProps.planetResidents[1].map((resident, index) => (
+          <p key={index}>{resident}</p>
+        ))}
+      </React.Fragment>
+      : <p>Loading</p>}
     </div>
   );
 }
@@ -36,5 +32,8 @@ PlanetResidentsTable.propTypes = {
 
 }
 
+const mapStateToProps = state => ({
+  allPlanetsProps: state.allPlanetsState
+});
 
-export default PlanetResidentsTable;
+export default connect(mapStateToProps, { getPlanetResidents })(PlanetResidentsTable);
