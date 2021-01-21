@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 
 import './Navbar.css';
@@ -8,8 +9,8 @@ import FormModal from '../FormModal/FormModal';
 function Navbar() {
   return (
     <nav>
-      <h1>Star Wars Planets</h1>
-      <button>Add Planet</button>
+      <Link to='/' ><h1>Star Wars Planets</h1></Link>
+      <FormModal />
     </nav>
   );
 }

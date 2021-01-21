@@ -17,9 +17,9 @@ function App() {
         <Navbar />
         <br />
         <Route path='/' exact component={PlanetsTable} />
-        <Route path='/planet/:id' component={PlanetInfo} />
-        <Route path='/film/:id' component={PlanetFilmsTable} />
-        <Route path='/resident/:id' component={PlanetResidentsTable} />
+        <Route path='/planet/:id' exact component={PlanetInfo} />
+        <Route path='/planet/:id/films' exact component={PlanetFilmsTable} />
+        <Route path='/planet/:id/residents' exact component={PlanetResidentsTable} />
       </BrowserRouter>
     </Provider>
 

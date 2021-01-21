@@ -3,3 +3,8 @@ nav {
   justify-content: space-between;
   align-items: center
 }
+
+nav a {
+  text-decoration: none;
+  color: inherit;
+}
