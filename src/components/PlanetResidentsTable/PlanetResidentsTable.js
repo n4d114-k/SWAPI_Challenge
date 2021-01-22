@@ -6,8 +6,6 @@ import { useParams } from 'react-router-dom';
 
 import getPlanetResidents from '../../actions/getPlanetResidents';
 
-import './PlanetResidentstable.css';
-
 function PlanetResidentsTable({ planetResidents, getPlanetResidents}) {
 
   const params = useParams();

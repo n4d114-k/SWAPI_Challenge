@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { PropTypes } from 'prop-types';
-
 import { useParams } from 'react-router-dom';
-
-import './PlanetFilmsTable.css';
-
 import getPlanetFilms from '../../actions/getPlanetFilms';
 
 function PlanetFilmsTable({ planetFilms, getPlanetFilms}) {

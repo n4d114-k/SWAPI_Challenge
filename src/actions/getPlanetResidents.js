@@ -8,7 +8,6 @@ const addToPlanetresidents = (filmName, residents, err = null) => ({
 
 const getPlanetResidents = (planetId) => {
   return async (dispatch) => {
-    console.log('Getting Planet Residents');
     try {
       const data = await axios.get(`https://swapi.dev/api/planets/${planetId}`);
       const filmName = data.data.name;

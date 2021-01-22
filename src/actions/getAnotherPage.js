@@ -1,5 +1,4 @@
 import * as actionTypes from './types';
-import axios from 'axios';
 
 const getNextPage = (action) => {
   return(dispatch) => {

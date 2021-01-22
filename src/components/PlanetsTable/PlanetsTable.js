@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { useParams } from 'react-router-dom';
-
 import './PlanetsTable.css';
-
 import getAllPlanets from '../../actions/getAllPlanets';
 import getAnotherPage from '../../actions/getAnotherPage';
 

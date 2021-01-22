@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-
 import { useParams } from 'react-router-dom';
-
-import './PlanetInfo.css';
-
 import getPlanetInfo from '../../actions/getPlanetInfo';
 
 function PlanetInfo({ selectedPlanet, getPlanetInfo}) {

@@ -8,7 +8,6 @@ const addToPlanetFilms = (filmName, films, err = null) => ({
 
 const getPlanetFilms = (planetId) => {
   return async (dispatch) => {
-    console.log('Getting Planet Films');
     try {
       const data = await axios.get(`https://swapi.dev/api/planets/${planetId}`)
       const filmName = data.data.name;
