@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { useParams } from 'react-router-dom';
 import './PlanetsTable.css';
 import getAllPlanets from '../../actions/getAllPlanets';
 import getAnotherPage from '../../actions/getAnotherPage';
@@ -31,8 +30,6 @@ function Planets({ allPlanetsProps, getAllPlanets, getAnotherPage }) {
         <thead>
           <tr>
             {allPlanetsProps.header.map((colName, i)=> <th key={colName}><p className='value'>{colName}</p><p className='type'>{dataTypesArr[i]}</p></th>)}
-            <th><p className='value'>residents</p><p className='type'>{dataTypesArr[9]}</p></th>
-            <th><p className='value'>films</p><p className='type'>{dataTypesArr[10]}</p></th>
           </tr>
         </thead>
         <tbody>
