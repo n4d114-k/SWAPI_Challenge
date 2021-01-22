@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import propTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 
 import { useParams } from 'react-router-dom';
 
@@ -18,21 +18,21 @@ function PlanetFilmsTable({ planetFilms, getPlanetFilms}) {
   }, []);
 
   return (
-    <div>
+    <div className='info-wrapper'>
       {planetFilms ?
-        <React.Fragment>
-        <h3>{planetFilms.filmName} Films:</h3>
+        <div className='info'>
+        <h3 className='planet-name'>{planetFilms.filmName} Films:</h3>
         {planetFilms.films.map((film) => (
           <p key={film.url}>{film.title}</p>
         ))}
-      </React.Fragment>
+      </div>
       : <p>Loading</p>}
     </div>
   );
 }
 
 PlanetFilmsTable.propTypes = {
-
+  planetFilms: PropTypes.object,
 }
 
 const mapStateToProps = state => ({

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import propTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 
 import { useParams } from 'react-router-dom';
 
@@ -18,10 +18,11 @@ function PlanetInfo({ selectedPlanet, getPlanetInfo}) {
   }, []);
 
   return (
+    <div className='info-wrapper'>
     <div className='info'>
       {selectedPlanet ?
         <React.Fragment>
-        <div><b>Name:</b> {selectedPlanet.name}</div>
+        <div className='planet-name'><b>Planet Name:</b> {selectedPlanet.name}</div>
         <div><b>Rotation Period:</b> {selectedPlanet.rotation_period}</div>
         <div><b>Orbital Period:</b> {selectedPlanet.orbital_period}</div>
         <div><b>DiameterL:</b>{selectedPlanet.diameter}</div>
@@ -35,11 +36,12 @@ function PlanetInfo({ selectedPlanet, getPlanetInfo}) {
         </React.Fragment>
         : <p>Loading</p>}
     </div>
+  </div>
   );
 }
 
 PlanetInfo.propTypes = {
-
+  selectedPlanet: PropTypes.object,
 }
 
 const mapStateToProps = state => ({

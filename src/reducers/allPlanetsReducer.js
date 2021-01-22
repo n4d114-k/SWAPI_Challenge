@@ -11,7 +11,9 @@ const initialState = {
       'terrain',
       'surface_water',
       'population'
-    ]
+    ],
+    next: true,
+    prev: false
 };
 
 function gridReducer(state = initialState, action) {
@@ -22,6 +24,20 @@ function gridReducer(state = initialState, action) {
         ...state,
         values: action.payload
       };
+    case actionTypes.GET_NEXT_PAGE:
+      return {
+        ...state,
+        values: action.payload,
+        next: action.next,
+        prev: action.prev
+      }
+    case actionTypes.GET_PREV_PAGE:
+      return {
+        ...state,
+        values: action.payload,
+        next: action.next,
+        prev: action.prev
+      }
     case actionTypes.GET_PLANET_INFO:
       return {
         ...state,

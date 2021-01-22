@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import propTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 
 import { useParams } from 'react-router-dom';
 
@@ -17,21 +17,21 @@ function PlanetResidentsTable({ planetResidents, getPlanetResidents}) {
   }, []);
 
   return (
-    <div>
+    <div className='info-wrapper'>
       {planetResidents ?
-      <React.Fragment>
-        <h3>{planetResidents.filmName} Residents:</h3>
+      <div className='info'>
+        <h3 className='planet-name'>{planetResidents.filmName} Residents:</h3>
         {planetResidents.residents.map((resident) => (
           <p key={resident.url}>{resident.name}</p>
         ))}
-      </React.Fragment>
+      </div>
       : <p>Loading</p>}
     </div>
   );
 }
 
 PlanetResidentsTable.propTypes = {
-
+  planetResidents: PropTypes.object,
 }
 
 const mapStateToProps = state => ({
