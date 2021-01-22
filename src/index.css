@@ -37,5 +37,5 @@ body {
 
 .makeStyles-paper-1 input[type="submit"]:hover {
   background-color: var(--yellow);
-  color: var(--black);  
+  color: var(--black);
 }

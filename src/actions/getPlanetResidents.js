@@ -1,20 +1,26 @@
 import * as actionTypes from './types';
 import axios from 'axios';
 
+const addToPlanetresidents = (filmName, residents, err = null) => ({
+  type: actionTypes.GET_PLANET_RESIDENTS,
+  payload: {filmName, residents, err}
+});
+
 const getPlanetResidents = (planetId) => {
-  return(dispatch) => {
+  return async (dispatch) => {
     console.log('Getting Planet Residents');
-
-    axios.get(`https://swapi.dev/api/planets/${planetId}`).then(data => {
-      const name = data.data.name;
-      const residents = data.data.residents;
-      dispatch(addToPlanetresidents(name, residents));
-    });
-
-    const addToPlanetresidents = (name, data) => ({
-      type: actionTypes.GET_PLANET_RESIDENTS,
-      payload: [name, data]
-    });
+    try {
+      const data = await axios.get(`https://swapi.dev/api/planets/${planetId}`);
+      const filmName = data.data.name;
+      const residentsLink = data.data.residents;
+      const residentsData = (await Promise.all(
+        residentsLink.map(link => axios.get(link))
+      ))
+      .map(res => res.data);
+      dispatch(addToPlanetresidents(filmName, residentsData));
+    } catch (err) {
+      throw err;
+    }
   }
 }
 

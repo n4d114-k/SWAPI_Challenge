@@ -27,12 +27,12 @@ function Planets({ allPlanetsProps, getAllPlanets}) {
         <tbody>
           {allPlanetsProps.values ? allPlanetsProps.values.map((row, index) => (
             <tr key={index} id={row.name}>
-              {allPlanetsProps.header.map((colName) => <td key={colName}><Link to={`/planet/:${index+1}`}>{row[colName]}</Link></td>)}
+              {allPlanetsProps.header.map((colName) => <td key={colName}><Link to={`/planet/${index+1}`}>{row[colName]}</Link></td>)}
                 <td>
-                  { row.residents.length > 0 ? <Link className='btn' to={`/planet/:${index+1}/residents`} >{row.residents.length}</Link> : ''}
+                  { row.residents.length > 0 ? <Link className='btn' to={`/planet/${index+1}/residents`} >{row.residents.length}</Link> : ''}
                 </td>
                 <td>
-                  { row.films.length > 0 ? <Link className='btn' to={`/planet/:${index+1}/films`} >{row.films.length}</Link>: ''}
+                  { row.films.length > 0 ? <Link className='btn' to={`/planet/${index+1}/films`} >{row.films.length}</Link>: ''}
                 </td>
             </tr>
           )) : <tr><td>Loading</td></tr> }

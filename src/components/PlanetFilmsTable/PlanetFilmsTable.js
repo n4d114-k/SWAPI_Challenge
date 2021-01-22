@@ -3,25 +3,27 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import propTypes from 'prop-types';
 
+import { useParams } from 'react-router-dom';
+
 import './PlanetFilmsTable.css';
 
 import getPlanetFilms from '../../actions/getPlanetFilms';
 
-function PlanetFilmsTable({ location, allPlanetsProps, getPlanetFilms}) {
+function PlanetFilmsTable({ planetFilms, getPlanetFilms}) {
 
-  const id = location.pathname.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g);
+  const params = useParams();
 
   useEffect(() => {
-    getPlanetFilms(id[0]);
+    getPlanetFilms(params.id);
   }, []);
 
   return (
     <div>
-      {allPlanetsProps.planetFilms ?
+      {planetFilms ?
         <React.Fragment>
-        <h3>{allPlanetsProps.planetFilms[0]} Films:</h3>
-        {allPlanetsProps.planetFilms[1].map((film, index) => (
-          <p key={index}>{film}</p>
+        <h3>{planetFilms.filmName} Films:</h3>
+        {planetFilms.films.map((film) => (
+          <p key={film.url}>{film.title}</p>
         ))}
       </React.Fragment>
       : <p>Loading</p>}
@@ -34,7 +36,7 @@ PlanetFilmsTable.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  allPlanetsProps: state.allPlanetsState
+  planetFilms: state.allPlanetsState.planetFilms
 });
 
 export default connect(mapStateToProps, { getPlanetFilms })(PlanetFilmsTable);
