@@ -13,7 +13,8 @@ const initialState = {
       'population'
     ],
     next: true,
-    prev: false
+    prev: false,
+    page: 1
 };
 
 function gridReducer(state = initialState, action) {
@@ -22,21 +23,21 @@ function gridReducer(state = initialState, action) {
     case actionTypes.GET_ALL_PLANETS:
       return {
         ...state,
-        values: action.payload
+        values: action.payload,
+        next: action.next,
+        prev: action.prev,
       };
     case actionTypes.GET_NEXT_PAGE:
       return {
         ...state,
-        values: action.payload,
-        next: action.next,
-        prev: action.prev
+        values: state.values,
+        page: state.page + 1
       }
     case actionTypes.GET_PREV_PAGE:
       return {
         ...state,
-        values: action.payload,
-        next: action.next,
-        prev: action.prev
+        values: state.values,
+        page: state.page - 1
       }
     case actionTypes.GET_PLANET_INFO:
       return {

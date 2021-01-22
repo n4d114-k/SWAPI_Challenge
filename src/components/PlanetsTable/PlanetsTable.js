@@ -7,32 +7,25 @@ import { useParams } from 'react-router-dom';
 import './PlanetsTable.css';
 
 import getAllPlanets from '../../actions/getAllPlanets';
-import getNextPage from '../../actions/getNextPage';
-import getPrevPage from '../../actions/getPrevPage';
+import getAnotherPage from '../../actions/getAnotherPage';
 
-function Planets({ allPlanetsProps, getAllPlanets, getNextPage, getPrevPage }) {
-
-  const [currentPage, setCurrentPage] = useState(1);
+function Planets({ allPlanetsProps, getAllPlanets, getAnotherPage }) {
 
   useEffect(() => {
-    getAllPlanets();
+    getAllPlanets(allPlanetsProps.page);
   }, []);
 
   let dataTypesArr;
   allPlanetsProps.values ? dataTypesArr = Object.values(allPlanetsProps.values[0]).map(value => typeof value) : dataTypesArr = '';
 
   const handlePrev = () => {
-    if (allPlanetsProps.prev ) {
-      setCurrentPage(currentPage - 1);
-    }
-    getPrevPage(currentPage);
+    getAnotherPage('decrease');
+    getAllPlanets(allPlanetsProps.page);
   };
 
   const handleNext = () => {
-    if (allPlanetsProps.next) {
-      setCurrentPage(currentPage + 1);
-    }
-    getNextPage(currentPage);
+    getAnotherPage('increase');
+    getAllPlanets(allPlanetsProps.page);
   };
   return (
     <div className='grid-wrapper'>
@@ -58,8 +51,8 @@ function Planets({ allPlanetsProps, getAllPlanets, getNextPage, getPrevPage }) {
           )) : <tr><td>Loading</td></tr> }
         </tbody>
       </table>
-      <button type='button' disabled={allPlanetsProps.prev ? 'disabled' : ''} className='navigation-btn' onClick={() => handlePrev()}>Prev</button>
-      <button type='button' disabled={allPlanetsProps.next ? 'disabled' : ''} className='navigation-btn' onClick={() => handleNext()}>Next</button>
+      <button type='button' disabled={!allPlanetsProps.prev} className='navigation-btn' onClick={() => handlePrev()}>Prev</button>
+      <button type='button' disabled={!allPlanetsProps.next} className='navigation-btn' onClick={() => handleNext()}>Next</button>
   </div>
   );
 }
@@ -72,4 +65,4 @@ const mapStateToProps = state => ({
   allPlanetsProps: state.allPlanetsState
 });
 
-export default connect(mapStateToProps, { getAllPlanets, getNextPage, getPrevPage })(Planets);
+export default connect(mapStateToProps, { getAllPlanets, getAnotherPage })(Planets);

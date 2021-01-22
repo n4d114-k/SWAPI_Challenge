@@ -1,17 +1,22 @@
 import * as actionTypes from './types';
 import axios from 'axios';
 
-const getAllPlanets = () => {
+const getAllPlanets = (pageNum) => {
   return(dispatch) => {
     console.log('Getting All Planets');
-    axios.get('https://swapi.dev/api/planets')
+    axios.get(`https://swapi.dev/api/planets/?page=${pageNum}`)
     .then(data => {
-      dispatch(addToPlanetsState(data.data.results))
+      const next = !!data.data.next;
+      const prev = !!data.data.previous;
+      const results = data.data.results;
+      dispatch(addToPlanetsState(next, prev, results))
     });
 
-    const addToPlanetsState = (data) => ({
+    const addToPlanetsState = (next, prev, results) => ({
       type: actionTypes.GET_ALL_PLANETS,
-      payload: data
+      payload: results,
+      next: next,
+      prev: prev
     });
   }
 }
