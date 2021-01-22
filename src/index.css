@@ -1,17 +1,41 @@
+@import url("https://fonts.googleapis.com/css?family=Oswald");
+
+:root {
+  --black: #2b2c33;
+  --yellow: #FFF490;
+  --white: #f1f6f9;
+}
+
 body {
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: "Oswald", sans-serif;
+  background-color: var(--black);
+  color: var(--yellow);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.makeStyles-paper-1 input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--yellow);
+  width: 100%;
 }
 
-.app {
-  text-align: center;
+.makeStyles-paper-1 input[type="submit"] {
+  margin-top: 40px;
+  background-color: transparent;
+  border: 2px solid var(--yellow);
+  font-family: inherit;
+  font-size: 1em;
+  border-radius: 6px;
+  color: var(--yellow);
+  padding: 7px;
+  cursor: pointer;
+}
+
+.makeStyles-paper-1 input[type="submit"]:hover {
+  background-color: var(--yellow);
+  color: var(--black);  
 }

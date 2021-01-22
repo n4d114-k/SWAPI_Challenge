@@ -9,12 +9,15 @@ const getPlanetFilms = (planetId) => {
       const name = data.data.name;
       const filmsLinks = data.data.films;
       dispatch(addToPlanetFilms(name, filmsLinks));
-    })
+    });
 
     const addToPlanetFilms = (name, data) => ({
       type: actionTypes.GET_PLANET_FILMS,
       payload: [name, data]
     });
+
+
+
   }
 }
 

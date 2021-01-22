@@ -1,5 +1,8 @@
+.grid-wrapper {
+  margin: 0 100px;
+}
+
 .gridTable {
-  /* border: 1px solid #000; */
   width: 100%;
   border-spacing: 0;
   border-collapse: separate;
@@ -11,7 +14,7 @@
   text-transform: uppercase;
   border-bottom: 1px solid #333;
   padding: 5px 10px;
-  color: #aaa;
+  color: var(--white);
 }
 
 .gridTable tbody tr td {
@@ -27,7 +30,8 @@
 }
 
 .gridTable tbody tr:hover td {
-  background: #f1f1f1;
+  background-color: var(--yellow);
+  color: var(--black);
 }
 
 .gridTable  .btn {

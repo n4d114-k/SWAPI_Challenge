@@ -15,29 +15,30 @@ function Planets({ allPlanetsProps, getAllPlanets}) {
   }, []);
 
   return (
-    <table className='gridTable'>
-      <thead>
-        <tr>
-          {allPlanetsProps.header.map(colName => <th key={colName}>{colName}</th>)}
-          <th>residents</th>
-          <th>films</th>
-        </tr>
-      </thead>
-      <tbody>
-        {allPlanetsProps.values ? allPlanetsProps.values.map((row, index) => (
-          <tr key={index} id={row.name}>
-            {allPlanetsProps.header.map((colName) => <td key={colName}><Link to={`/planet/:${index+1}`}>{row[colName]}</Link></td>)}
-              <td>
-                { row.residents.length > 0 ? <Link className='btn' to={`/planet/:${index+1}/residents`} >{row.residents.length}</Link> : ''}
-              </td>
-              <td>
-                { row.films.length > 0 ? <Link className='btn' to={`/planet/:${index+1}/films`} >{row.films.length}</Link>: ''}
-              </td>
+    <div className='grid-wrapper'>
+      <table className='gridTable'>
+        <thead>
+          <tr>
+            {allPlanetsProps.header.map(colName => <th key={colName}>{colName}</th>)}
+            <th>residents</th>
+            <th>films</th>
           </tr>
-        )) : <tr><td>Loading</td></tr> }
-      </tbody>
-    </table>
-
+        </thead>
+        <tbody>
+          {allPlanetsProps.values ? allPlanetsProps.values.map((row, index) => (
+            <tr key={index} id={row.name}>
+              {allPlanetsProps.header.map((colName) => <td key={colName}><Link to={`/planet/:${index+1}`}>{row[colName]}</Link></td>)}
+                <td>
+                  { row.residents.length > 0 ? <Link className='btn' to={`/planet/:${index+1}/residents`} >{row.residents.length}</Link> : ''}
+                </td>
+                <td>
+                  { row.films.length > 0 ? <Link className='btn' to={`/planet/:${index+1}/films`} >{row.films.length}</Link>: ''}
+                </td>
+            </tr>
+          )) : <tr><td>Loading</td></tr> }
+        </tbody>
+      </table>
+  </div>
   );
 }
 
