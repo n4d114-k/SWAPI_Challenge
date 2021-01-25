@@ -11,7 +11,10 @@ const initialState = {
       'terrain',
       'surface_water',
       'population'
-    ]
+    ],
+    next: true,
+    prev: false,
+    page: 1
 };
 
 function gridReducer(state = initialState, action) {
@@ -20,8 +23,20 @@ function gridReducer(state = initialState, action) {
     case actionTypes.GET_ALL_PLANETS:
       return {
         ...state,
-        values: action.payload
+        values: action.payload,
+        next: action.next,
+        prev: action.prev,
       };
+    case actionTypes.GET_NEXT_PAGE:
+      return {
+        ...state,
+        page: state.page + 1
+      }
+    case actionTypes.GET_PREV_PAGE:
+      return {
+        ...state,
+        page: state.page - 1
+      }
     case actionTypes.GET_PLANET_INFO:
       return {
         ...state,
@@ -32,11 +47,11 @@ function gridReducer(state = initialState, action) {
           ...state,
           planetResidents: action.payload
         }
-        case actionTypes.GET_PLANET_FILMS:
-          return {
-            ...state,
-            planetFilms: action.payload
-          }
+      case actionTypes.GET_PLANET_FILMS:
+        return {
+          ...state,
+          planetFilms: action.payload
+        }
     default:
       return state;
   }

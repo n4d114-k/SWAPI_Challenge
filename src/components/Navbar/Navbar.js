@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import propTypes from 'prop-types';
-
 import './Navbar.css';
-
 import FormModal from '../FormModal/FormModal';
 
 function Navbar() {
@@ -14,10 +11,5 @@ function Navbar() {
     </nav>
   );
 }
-
-Navbar.propTypes = {
-
-}
-
 
 export default Navbar;

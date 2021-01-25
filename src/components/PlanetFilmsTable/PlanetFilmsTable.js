@@ -1,40 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import propTypes from 'prop-types';
-
-import './PlanetFilmsTable.css';
-
+import { PropTypes } from 'prop-types';
+import { useParams } from 'react-router-dom';
 import getPlanetFilms from '../../actions/getPlanetFilms';
 
-function PlanetFilmsTable({ location, allPlanetsProps, getPlanetFilms}) {
+function PlanetFilmsTable({ planetFilms, getPlanetFilms}) {
 
-  const id = location.pathname.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g);
+  const params = useParams();
 
   useEffect(() => {
-    getPlanetFilms(id[0]);
+    getPlanetFilms(params.id);
   }, []);
 
   return (
-    <div>
-      {allPlanetsProps.planetFilms ?
-        <React.Fragment>
-        <h3>{allPlanetsProps.planetFilms[0]} Films:</h3>
-        {allPlanetsProps.planetFilms[1].map((film, index) => (
-          <p key={index}>{film}</p>
+    <div className='info-wrapper'>
+      {planetFilms ?
+        <div className='info'>
+        <h3 className='planet-name'>{planetFilms.filmName} Films:</h3>
+        {planetFilms.films.map((film) => (
+          <p key={film.url}>{film.title}</p>
         ))}
-      </React.Fragment>
+      </div>
       : <p>Loading</p>}
     </div>
   );
 }
 
 PlanetFilmsTable.propTypes = {
-
+  planetFilms: PropTypes.object,
 }
 
 const mapStateToProps = state => ({
-  allPlanetsProps: state.allPlanetsState
+  planetFilms: state.allPlanetsState.planetFilms
 });
 
 export default connect(mapStateToProps, { getPlanetFilms })(PlanetFilmsTable);

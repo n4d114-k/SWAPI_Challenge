@@ -9,7 +9,7 @@
 }
 
 .gridTable thead tr th {
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
   border-bottom: 1px solid #333;
@@ -17,9 +17,17 @@
   color: var(--white);
 }
 
+.gridTable thead tr th .value {
+  float: left;
+}
+
+.gridTable thead tr th .type {
+  float: right;
+}
+
 .gridTable tbody tr td {
   padding: 10px;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   border-bottom: 1px solid #333;
 }
@@ -34,6 +42,22 @@
   color: var(--black);
 }
 
-.gridTable  .btn {
+.gridTable .btn {
   padding: 5px;
+  text-decoration: underline;
+}
+
+.navigation-btn {
+  font-size: 0.6em;
+}
+
+.navigation-btn:disabled {
+  color: var(--white);
+  border: 2px solid var(--white);
+}
+
+.navigation-btn:disabled:hover {
+  cursor: default;
+  background-color: var(--white);
+  color: var(--black);
 }

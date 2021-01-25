@@ -37,5 +37,29 @@ body {
 
 .makeStyles-paper-1 input[type="submit"]:hover {
   background-color: var(--yellow);
-  color: var(--black);  
+  color: var(--black);
+}
+
+.info-wrapper {
+  justify-content: center;
+  display: flex;
+}
+
+.info {
+  font-size: 1.2em;
+  border: 2px solid var(--yellow);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.info .planet-name {
+  font-size: 1.4em;
+  border-bottom: 1px solid var(--yellow);
+}
+
+.info a {
+  color: var(--white)
 }

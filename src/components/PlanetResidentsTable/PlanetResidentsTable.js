@@ -1,39 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import propTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
+
+import { useParams } from 'react-router-dom';
 
 import getPlanetResidents from '../../actions/getPlanetResidents';
 
-import './PlanetResidentstable.css';
+function PlanetResidentsTable({ planetResidents, getPlanetResidents}) {
 
-function PlanetResidentsTable({ location, allPlanetsProps, getPlanetResidents}) {
-
-  const id = location.pathname.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g);
+  const params = useParams();
 
   useEffect(() => {
-    getPlanetResidents(id[0]);
+    getPlanetResidents(params.id);
   }, []);
 
   return (
-    <div>
-      {allPlanetsProps.planetResidents ?
-      <React.Fragment>
-        <h3>{allPlanetsProps.planetResidents[0]}</h3>
-        {allPlanetsProps.planetResidents[1].map((resident, index) => (
-          <p key={index}>{resident}</p>
+    <div className='info-wrapper'>
+      {planetResidents ?
+      <div className='info'>
+        <h3 className='planet-name'>{planetResidents.filmName} Residents:</h3>
+        {planetResidents.residents.map((resident) => (
+          <p key={resident.url}>{resident.name}</p>
         ))}
-      </React.Fragment>
+      </div>
       : <p>Loading</p>}
     </div>
   );
 }
 
 PlanetResidentsTable.propTypes = {
-
+  planetResidents: PropTypes.object,
 }
 
 const mapStateToProps = state => ({
-  allPlanetsProps: state.allPlanetsState
+  planetResidents: state.allPlanetsState.planetResidents
 });
 
 export default connect(mapStateToProps, { getPlanetResidents })(PlanetResidentsTable);
